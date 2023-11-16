@@ -5,15 +5,15 @@ import java.util.Scanner;
 class http {
     public static void main(String[] args) throws Exception {
         System.out.println("Enter port : ");
-        Scanner dop = new Scanner(System.in);
-        int port = dop.nextInt();
-        ServerSocket serverSocket = new ServerSocket(port);
+        Scanner sin = new Scanner(System.in);
+        int port = sin.nextInt();
+        ServerSocket ss = new ServerSocket(port);
         System.err.println("Local Host Server running at : " + port);
         while (true) {
-            Socket clientSocket = serverSocket.accept();
+            Socket sk = ss.accept();
             System.err.println("Server connected!");
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(sk.getInputStream()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(sk.getOutputStream()));
             String s;
             while ((s = in.readLine()) != null) {
                 System.out.println(s);
@@ -32,7 +32,7 @@ class http {
             System.err.println("Server Connection Closed\n");
             out.close();
             in.close();
-            clientSocket.close();
+            sk.close();
         }
     }
 }
